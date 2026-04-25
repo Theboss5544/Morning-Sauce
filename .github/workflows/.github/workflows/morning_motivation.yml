@@ -1,0 +1,25 @@
+name: Morning Motivation
+ 
+on:
+  schedule:
+    - cron: '0 13 * * *'  # runs 8am EST every day (1pm UTC = 8am EST)
+  workflow_dispatch:       # lets you run it manually to test
+ 
+jobs:
+  send-quote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+ 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+ 
+      - name: Send morning quote
+        env:
+          GMAIL: ${{ secrets.GMAIL }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          PHONE_SMS_EMAIL: ${{ secrets.PHONE_SMS_EMAIL }}
+        run: python send_quote.py
+ 
