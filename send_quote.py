@@ -15,14 +15,13 @@ def get_quote():
     with urllib.request.urlopen(req) as response:
         data = json.loads(response.read())
         quote = data[0]['q']
-        author = data[0]['a']
-        return f'"{quote}" - {author}'
+        return f'Dwayne, {quote}'
 
 def send_text(quote):
     msg = MIMEText(quote)
     msg['From'] = GMAIL
     msg['To'] = PHONE_SMS_EMAIL
-    msg['Subject'] = "Morning Motivation 🔥"
+    msg['Subject'] = "Morning Motivation"
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
         server.login(GMAIL, GMAIL_APP_PASSWORD)
