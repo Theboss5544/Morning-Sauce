@@ -21,6 +21,7 @@ def send_text(quote):
     msg = MIMEText(quote)
     msg['From'] = GMAIL
     msg['To'] = PHONE_SMS_EMAIL
+    msg['Subject'] = " "
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
         server.login(GMAIL, GMAIL_APP_PASSWORD)
